@@ -78,13 +78,153 @@ const strapiMediaUrl = (url) => {
 </template>
 
 <style lang="scss">
+$mp: 24px;
+
 .project-detail {
   margin-top: 84px;
 
-  .loading {
-    font-size: 18px;
-    text-align: center;
-    color: gray;
+  .heading {
+    //margin-top: 90px;
+    margin-top: 79px;
+    margin-bottom: $mp * 2;
+    position: relative;
+    color: black;
+    white-space: nowrap;
+
+    @media only screen and (max-width: 1098px) {
+      white-space: normal;
+    }
+
+    * { white-space: normal; }
+
+    &__image,
+    &__content {
+      display: inline-block;
+      width: 49.4%;
+      font-size: 0;
+      vertical-align: top;
+      box-sizing: border-box;
+    }
+
+    &__image {
+      width: calc(66% + 26px);
+      padding-right: $mp;
+      // border: 1px dashed red;
+
+      @media only screen and (max-width: 1098px) {
+        width: 100%;
+        padding-right: 0;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &__content {
+      width: calc(33.33% - 26px);
+      height: 100%;
+      padding-bottom: $mp;;
+
+      @media only screen and (max-width: 1098px) {
+        width: 100%;
+        position: relative;
+        margin-top: 30px;
+      }
+    }
+
+    &__title {
+      margin: 0;
+      margin-bottom: 10px;
+      margin-top: -2px;
+      font-size: 18px;
+      padding-bottom: 15px;
+      font-family: "MD-System", sans-serif;
+      font-weight: 900;
+      color: black;
+      border-bottom: 1px solid black;
+
+      @media only screen and (max-width: 1098px) {
+        margin-top: $mp;
+        margin-bottom: 0;
+      }
+    }
+    
+    &__desc {
+        a {
+          text-decoration: underline;
+        }
+    }
+
+    &__links,
+    &__desc {
+      padding-top: $mp;
+      font-size: 18px;
+      color: black;
+      font-weight: 200;
+
+      * { color: black; }
+
+      @media only screen and (max-width: 1098px) {
+        padding-right: 20%;
+      }
+
+      @media only screen and (max-width: 588px) {
+        padding-right: 0;
+      }
+
+
+      // typografy stuff
+      blockquote {
+        font-size: 15px;
+        font-weight: 200;
+        font-style: normal;
+        margin: 0;
+      }
+
+      p {
+        margin-top: 0;
+      }
+
+
+      hr {
+        border-top: 1px solid black;
+        margin-top: 38px;
+        margin-bottom: 10px;
+      }
+    }
+
+    &__links {
+      font-size: 14px;
+      position: absolute;
+      bottom: 0;
+      transition: 0.2s;
+
+      @media only screen and (max-width: 1098px) {
+        position: relative;
+        margin-top: 20px;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      a {
+        text-decoration: none !important;
+      }
+    }
+  }
+
+  .content-blocks {
+  }
+
+  .block {
+    margin-bottom: $mp;
+
+    &:last-of-type {
+      margin-bottom: $mp * 2;
+    }
   }
 }
+
 </style>
