@@ -1,7 +1,7 @@
 <template>
   <nuxt-link
     :key="article.id"
-    :to="`#`"
+    :to="{ name: 'project-slug', params: { slug: article.slug } }"
     class="thumb-container">
   
     <!-- IF IMAGE -->
