@@ -35,7 +35,6 @@ $hl: #ff2a00;
 .header-inner {
   max-width: $maxwidth;
   margin: 0 auto;
-  font-family: "MD-System", sans-serif;
   position: relative;
   padding: 0 $mp * 3;
 
