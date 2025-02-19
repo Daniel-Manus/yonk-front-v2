@@ -6,13 +6,11 @@
       <NuxtPage />
     </main>
 
-    <footer>
-      <p>Footer content goes here</p>
-    </footer>
+    <Footer />
   </div>
 </template>
 
 <script setup>
-// Import the Header component
+import Footer from "~/components/Footer.vue";
 import Header from "~/components/Header.vue";
 </script>
