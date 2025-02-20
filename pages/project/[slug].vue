@@ -6,7 +6,7 @@ import { useStrapi } from '../composables/useStrapi';
 
 const route = useRoute();
 const article = ref(null);
-const { fetchArticle } = useStrapi();
+const { fetchArticle, strapiMediaUrl } = useStrapi();
 
 // Fetch article on component mount
 onMounted(async () => {
@@ -15,12 +15,6 @@ onMounted(async () => {
   }
 });
 
-const strapiMediaUrl = (url) => {
-  if (url.startsWith("/")) {
-    return `${process.env.strapiBaseUri}${url}`;
-  }
-  return url;
-};
 
 // Handle SEO using VueUse's useHead
 // useHead({
@@ -68,7 +62,6 @@ const strapiMediaUrl = (url) => {
         <template v-if="block.__component === 'content-blocks.youtube-block'">
           <Youtube :block="block" />
         </template> -->
-        hi
       </template>
     </div>
   </div>

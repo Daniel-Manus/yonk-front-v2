@@ -15,6 +15,14 @@ export const useStrapi = () => {
     }
   };
 
+  // Utility to get the full media URL from Strapi
+  const strapiMediaUrl = (url) => {
+    if (url.startsWith("/")) {
+      return `${process.env.strapiBaseUri}${url}`;
+    }
+    return url;
+  };
+
   // Fetch homepage, articles, and global settings
   const getHomepage = async () => {
     return await fetchData("homepage");
@@ -34,5 +42,5 @@ export const useStrapi = () => {
     return article ? article[0] : null;  // Return the first article or null if not found
   };
 
-  return { getHomepage, getArticles, getGlobalSettings, fetchArticle };
+  return { getHomepage, getArticles, getGlobalSettings, fetchArticle, strapiMediaUrl };
 };

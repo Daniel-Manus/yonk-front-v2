@@ -39,7 +39,7 @@ const emit = defineEmits(['image-loaded']);
 const imgExt = ref(props.article.image?.ext.toLowerCase() || '');
 
 // Use the `useStrapi` composable
-const { strapiBaseUri } = useStrapi();
+const { strapiMediaUrl } = useStrapi();
 
 // Method to handle image load
 const onImageLoad = () => {
@@ -48,14 +48,6 @@ const onImageLoad = () => {
     width: props.article.image.width, 
     height: props.article.image.height 
   });
-};
-
-// Replaced getStrapiMedia with the strapiBaseUri from useStrapi composable
-const strapiMediaUrl = (url) => {
-  if (url.startsWith("/")) {
-    return `${strapiBaseUri.value}${url}`;
-  }
-  return url;
 };
 
 </script>
