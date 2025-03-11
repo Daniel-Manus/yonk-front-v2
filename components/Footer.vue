@@ -26,12 +26,6 @@
 <script setup></script>
 
 <style lang="scss" scoped>
-// Would be nice to make these globel :/
-// But, ain't nobody got time for that
-$maxwidth: 1700px;
-$mp: 24px;
-$hl: #ff2a00;
-
 footer {
   .links {
     display: inline-block;
@@ -63,7 +57,7 @@ footer {
     margin-left: 24px;
 
     &:hover {
-      color: $hl;
+      color: $color-hl;
     }
 
     @media only screen and (max-width: 600px) {

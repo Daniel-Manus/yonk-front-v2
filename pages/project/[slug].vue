@@ -71,8 +71,6 @@ onMounted(async () => {
 </template>
 
 <style lang="scss">
-$mp: 24px;
-
 .project-detail {
   margin-top: 84px;
 
@@ -81,7 +79,7 @@ $mp: 24px;
     margin-top: 79px;
     margin-bottom: $mp * 2;
     position: relative;
-    color: black;
+    color: $color-fg;
     white-space: nowrap;
 
     @media only screen and (max-width: 1098px) {
@@ -117,7 +115,7 @@ $mp: 24px;
     &__content {
       width: calc(33.33% - 26px);
       height: 100%;
-      padding-bottom: $mp;;
+      padding-bottom: $mp;
 
       @media only screen and (max-width: 1098px) {
         width: 100%;
@@ -156,7 +154,9 @@ $mp: 24px;
       color: black;
       font-weight: 200;
 
-      * { color: black; }
+      * {
+        color: $color-fg;
+      }
 
       @media only screen and (max-width: 1098px) {
         padding-right: 20%;
@@ -165,7 +165,6 @@ $mp: 24px;
       @media only screen and (max-width: 588px) {
         padding-right: 0;
       }
-
 
       // typografy stuff
       blockquote {
@@ -178,7 +177,6 @@ $mp: 24px;
       p {
         margin-top: 0;
       }
-
 
       hr {
         border-top: 1px solid black;

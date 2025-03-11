@@ -17,12 +17,6 @@
 <script setup></script>
 
 <style lang="scss" scoped>
-// Would be nice to make these globel :/
-// But, ain't nobody got time for that
-$maxwidth: 1700px;
-$mp: 24px;
-$hl: #ff2a00;
-
 .header {
   top: 0;
   left: 0;
@@ -57,7 +51,7 @@ $hl: #ff2a00;
     margin-left: 24px;
 
     &:hover {
-      color: $hl;
+      color: $color-hl;
     }
   }
 }
@@ -79,7 +73,7 @@ $hl: #ff2a00;
 
   &:hover {
     path {
-      fill: $hl;
+      fill: $color-hl;
     }
   }
 }

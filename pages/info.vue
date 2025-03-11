@@ -106,10 +106,7 @@ console.log("🌈 ~ global", global)
 // const faviconUrl = favicon && strapiMediaUrl(favicon.url);
 </script>
 
-
 <style lang="scss">
-$mp: 24px;
-
 .info {
   margin-top: 84px;
 
@@ -197,7 +194,6 @@ $mp: 24px;
       }
 
       h4 {
-        font-family: "MD-System", sans-serif;
         font-weight: 900;
         font-size: inherit;
         color: black;

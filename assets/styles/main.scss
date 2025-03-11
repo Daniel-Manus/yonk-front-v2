@@ -1,10 +1,5 @@
 @use "fonts" as *;
-
-// Would be nice to make these globel :/
-// But, ain't nobody got time for that
-$maxwidth: 1700px;
-$mp: 24px;
-$hl: #ff2a00;
+@use "variables" as *;
 
 body::-webkit-scrollbar {
   display: none;
@@ -14,17 +9,19 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   font-family: "MD-System", sans-serif;
+  color: $color-fg;
+  background: $color-bg;
 }
 
 a {
   text-decoration: none;
-  color: black;
+  color: $color-fg;
   transition: 0.2s ease;
 }
 
 a:hover {
   text-decoration: none;
-  color: #ff2a00;
+  color: $color-hl;
 }
 
 h1 {
@@ -54,10 +51,11 @@ h1 {
 }
 
 ::selection {
-  background: black;
-  color: white;
+  background: $color-fg;
+  color: $color-bg;
 }
+
 ::-moz-selection {
-  background: black;
-  color: white;
+  background: $color-fg;
+  color: $color-bg;
 }
