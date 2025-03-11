@@ -93,7 +93,7 @@ onBeforeUnmount(() => {
 <style lang="scss">
 .masonry-grid {
   margin-bottom: 10px;
-  margin-top: 79px;
+  margin-top: $header-height;
 
   &.hidden {
     opacity: 0;

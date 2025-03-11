@@ -1,17 +1,13 @@
 <template>
-  <div>
-    <h2>Welcome to the Home Page!</h2>
-    <p>This page uses the default layout.</p>
-    <Articles :articles="articles" />
-  </div>
+  <Articles :articles="articles" />
 </template>
 
 <script setup>
 // const config = useRuntimeConfig();
 // const strapiBaseUri = config.public.strapiBaseUri;
 
-import { useStrapi } from "../composables/useStrapi";
 import Articles from "../components/Articles";
+import { useStrapi } from "../composables/useStrapi";
 // import { getMetaTags } from "../utils/seo";
 // import { getStrapiMedia } from "../utils/medias";
 
