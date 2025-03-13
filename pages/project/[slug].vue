@@ -13,6 +13,7 @@ import { usePageTitle } from "../composables/usePageTitle";
 const route = useRoute();
 const article = ref(null);
 const { fetchArticle, strapiMediaUrl } = useStrapi();
+const { md } = useMarkdown();
 
 // Fetch article on component mount
 onMounted(async () => {
@@ -54,15 +55,23 @@ onMounted(async () => {
       </div>
       <div class="heading__content">
         <h1 class="heading__title">{{ article.title }}</h1>
-        <div v-if="article.content" v-html="article.content" class="heading__desc"></div>
-        <div v-if="article.links" v-html="article.links" class="heading__links"></div>
+        <div
+          v-if="article.content"
+          v-html="md(article.content)"
+          class="heading__desc"
+        ></div>
+        <div
+          v-if="article.links"
+          v-html="md(article.links)"
+          class="heading__links"
+        ></div>
       </div>
     </div>
 
     <div class="content-blocks">
       <template v-for="block in article.dynamiclayout">
         <!-- Dynamic content blocks here -->
-        <!-- <template v-if="block.__component === 'content-blocks.images-block'">
+        <template v-if="block.__component === 'content-blocks.images-block'">
           <Images :block="block" />
         </template>
         <template v-if="block.__component === 'content-blocks.video-block'">
@@ -70,7 +79,7 @@ onMounted(async () => {
         </template>
         <template v-if="block.__component === 'content-blocks.youtube-block'">
           <Youtube :block="block" />
-        </template> -->
+        </template>
       </template>
     </div>
   </div>
@@ -95,7 +104,9 @@ onMounted(async () => {
       white-space: normal;
     }
 
-    * { white-space: normal; }
+    * {
+      white-space: normal;
+    }
 
     &__image,
     &__content {
@@ -149,11 +160,11 @@ onMounted(async () => {
         margin-bottom: 0;
       }
     }
-    
+
     &__desc {
-        a {
-          text-decoration: underline;
-        }
+      a {
+        text-decoration: underline;
+      }
     }
 
     &__links,
@@ -209,7 +220,7 @@ onMounted(async () => {
         margin: 0;
       }
 
-      a {
+      a  {
         text-decoration: none !important;
       }
     }
@@ -226,5 +237,4 @@ onMounted(async () => {
     }
   }
 }
-
 </style>
