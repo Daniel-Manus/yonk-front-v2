@@ -1,7 +1,13 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { useStrapi } from '../composables/useStrapi';
+import Images from "@/components/blocks/Images";
+import Video from "@/components/blocks/Video";
+import Youtube from "@/components/blocks/Youtube";
+import { useMarkdown } from "@/composables/useMarkdown";
+import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
+import { useStrapi } from "../../composables/useStrapi";
+import { usePageTitle } from "../composables/usePageTitle";
+
 // import { useHead } from '@vueuse/head';
 
 const route = useRoute();
@@ -12,9 +18,12 @@ const { fetchArticle, strapiMediaUrl } = useStrapi();
 onMounted(async () => {
   if (route.params.slug) {
     article.value = await fetchArticle(route.params.slug);
+    // Set page title once we have the article
+    if (article.value?.title) {
+      usePageTitle(article.value.title);
+    }
   }
 });
-
 
 // Handle SEO using VueUse's useHead
 // useHead({
