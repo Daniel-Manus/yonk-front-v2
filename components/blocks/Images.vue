@@ -1,5 +1,5 @@
 <template>
-  <div :class="'three-images-' + 0" class="three-images block">
+  <div v-if="block.images && block.images.length > 0" :class="'three-images-' + 0" class="three-images block">
     <div
       :class="'col-' + block.images.length"
       class="three-images__image"

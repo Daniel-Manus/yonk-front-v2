@@ -50,10 +50,10 @@ onMounted(async () => {
   <div v-if="article" class="project-detail">
     <!-- Show article content once it's loaded -->
     <div class="heading">
-      <div class="heading__image">
+      <div v-if="article.headerimage" class="heading__image">
         <img :src="strapiMediaUrl(article.headerimage.url)" alt="" />
       </div>
-      <div class="heading__content">
+      <div class="heading__content" :class="{ 'full-width': !article.headerimage }">
         <h1 class="heading__title">{{ article.title }}</h1>
         <div
           v-if="article.content"
@@ -69,7 +69,7 @@ onMounted(async () => {
     </div>
 
     <div class="content-blocks">
-      <template v-for="block in article.dynamiclayout">
+      <template v-for="block in article.dynamicLayout">
         <!-- Dynamic content blocks here -->
         <template v-if="block.__component === 'content-blocks.images-block'">
           <Images :block="block" />
@@ -136,6 +136,10 @@ onMounted(async () => {
       width: calc(33.33% - 26px);
       height: 100%;
       padding-bottom: $mp;
+
+      &.full-width {
+        width: 100%;
+      }
 
       @media only screen and (max-width: 1098px) {
         width: 100%;

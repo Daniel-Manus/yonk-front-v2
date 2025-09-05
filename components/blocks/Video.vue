@@ -1,5 +1,5 @@
 <template>
-  <div @click="handleClick" :class="'video-' + block.id" class="video block">
+  <div v-if="block.video" @click="handleClick" :class="'video-' + block.id" class="video block">
     <video ref="videoElement">
       <source
         :src="strapiMediaUrl(block.video.url) + '#t=0.1'"
@@ -52,11 +52,13 @@ const handleClick = () => {
 
 // Reset the video when it ends
 onMounted(() => {
-  const vid = videoElement.value;
-  vid.addEventListener("ended", () => {
-    vid.currentTime = 0;
-    playing.value = false;
-  });
+  if (videoElement.value && props.block.video) {
+    const vid = videoElement.value;
+    vid.addEventListener("ended", () => {
+      vid.currentTime = 0;
+      playing.value = false;
+    });
+  }
 });
 </script>
 

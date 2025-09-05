@@ -4,23 +4,23 @@
       <!-- INFO IMAGE/VIDEO 1 -->
       <img
         v-if="
-          (global.info_media_1 && global.info_media_1.ext === '.jpg') ||
-          global.info_media_1.ext === '.png'
+          (info.infoMedia1 && info.infoMedia1.ext === '.jpg') ||
+          (info.infoMedia1 && info.infoMedia1.ext === '.png')
         "
-        :src="strapiMediaUrl(global.info_media_1.url)"
+        :src="strapiMediaUrl(info.infoMedia1.url)"
         class="top"
         alt=""
       />
 
       <video
-        v-if="global.info_media_1 && global.info_media_1.ext === '.mp4'"
+        v-if="info.infoMedia1 && info.infoMedia1.ext === '.mp4'"
         class="top"
         muted
         autoplay
         loop
       >
         <source
-          :src="strapiMediaUrl(global.info_media_1.url)"
+          :src="strapiMediaUrl(info.infoMedia1.url)"
           type="video/mp4"
         />
         Your browser does not support the video tag.
@@ -29,23 +29,23 @@
       <!-- INFO IMAGE/VIDEO 2 -->
       <img
         v-if="
-          (global.info_media_2 && global.info_media_2.ext === '.jpg') ||
-          global.info_media_2.ext === '.png'
+          (info.infoMedia2 && info.infoMedia2.ext === '.jpg') ||
+          (info.infoMedia2 && info.infoMedia2.ext === '.png')
         "
-        :src="strapiMediaUrl(global.info_media_2.url)"
+        :src="strapiMediaUrl(info.infoMedia2.url)"
         class="bottom"
         alt=""
       />
 
       <video
-        v-if="global.info_media_2 && global.info_media_2.ext === '.mp4'"
+        v-if="info.infoMedia2 && info.infoMedia2.ext === '.mp4'"
         class="bottom"
         muted
         autoplay
         loop
       >
         <source
-          :src="strapiMediaUrl(global.info_media_2.url)"
+          :src="strapiMediaUrl(info.infoMedia2.url)"
           type="video/mp4"
         />
         Your browser does not support the video tag.
@@ -54,44 +54,44 @@
 
     <div class="content">
       <div
-        v-if="global.info_description"
-        v-html="md(global.info_description)"
+        v-if="info.infoDescription"
+        v-html="md(info.infoDescription)"
       />
       <div
-        v-if="global.info_description_2"
-        v-html="md(global.info_description_2)"
+        v-if="info.infoDescription2"
+        v-html="md(info.infoDescription2)"
       />
     </div>
 
     <!-- INFO IMAGE/VIDEO 2 (MOBILE ONLY) -->
     <img
       v-if="
-        (global.info_media_2 && global.info_media_2.ext === '.jpg') ||
-        global.info_media_2.ext === '.png'
+        (info.infoMedia2 && info.infoMedia2.ext === '.jpg') ||
+        (info.infoMedia2 && info.infoMedia2.ext === '.png')
       "
-      :src="strapiMediaUrl(global.info_media_2.url)"
+      :src="strapiMediaUrl(info.infoMedia2.url)"
       class="mobile"
       alt=""
     />
 
     <video
-      v-if="global.info_media_2 && global.info_media_2.ext === '.mp4'"
+      v-if="info.infoMedia2 && info.infoMedia2.ext === '.mp4'"
       class="mobile"
       muted
       autoplay
       preload="true"
       autobuffer="true"
     >
-      <source :src="strapiMediaUrl(global.info_media_2.url)" type="video/mp4" />
+      <source :src="strapiMediaUrl(info.infoMedia2.url)" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
 
     <!-- <div class="heading__media mobile">
           <Video 
-            v-if="global.info_media_2 && global.info_media_2.ext === '.mp4'"
+            v-if="global.infoMedia2 && global.infoMedia2.ext === '.mp4'"
             :block="{
               id: 'info-vid',
-              video: global.info_media_2
+              video: global.infoMedia2
           }" />
         </div> -->
   </div>
@@ -101,21 +101,47 @@
 // const config = useRuntimeConfig();
 // const strapiBaseUri = config.public.strapiBaseUri;
 
+import { computed } from "vue";
 import { useMarkdown } from "../composables/useMarkdown";
 import { usePageTitle } from "../composables/usePageTitle";
+import { useSEO } from "../composables/useSEO";
 import { useStrapi } from "../composables/useStrapi";
 
 // import { getMetaTags } from "../utils/seo";
 
-const { getHomepage, getArticles, getGlobalSettings, strapiMediaUrl } =
+const { getHomepage, getArticles, getGlobalSettings, getInfo, strapiMediaUrl } =
   useStrapi();
 const { md } = useMarkdown();
 
-// const { data: homepage } = await useAsyncData("homepage", getHomepage);
+const { data: homepage } = await useAsyncData("homepage", getHomepage);
 // const { data: articles } = await useAsyncData("articles", getArticles);
 const { data: global } = await useAsyncData("global", getGlobalSettings);
+const { data: info } = await useAsyncData("info", getInfo);
 
 usePageTitle("Info");
+
+// Compute SEO image URL
+const seoImageUrl = computed(() => {
+  const featuredImage =
+    homepage.value?.seo?.metaImage || global.value?.defaultSeo?.metaImage;
+  return featuredImage ? strapiMediaUrl(featuredImage.url) : "";
+});
+
+useSEO({
+  title: global.value?.siteName || "Yonk",
+  description:
+    homepage.value?.seo?.metaDescription ||
+    global.value?.defaultSeo?.metaDescription ||
+    "Yonk's website",
+  image: seoImageUrl.value
+    ? {
+        url: seoImageUrl.value,
+        alt: global.value?.siteName || "Yonk",
+      }
+    : undefined,
+  url: process.client ? window.location.href : undefined,
+  keywords: homepage.value?.seo?.keywords || global.value?.defaultSeo?.keywords,
+});
 
 // Handle SEO (optional, move to a separate utility if needed)
 // const { seo } = homepage.value;

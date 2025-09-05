@@ -36,7 +36,7 @@ const props = defineProps({
 const emit = defineEmits(['image-loaded']);
 
 // Reactive state for image extension
-const imgExt = ref(props.article.image?.ext.toLowerCase() || '');
+const imgExt = ref(props.article.image?.ext?.toLowerCase() || '');
 
 // Use the `useStrapi` composable
 const { strapiMediaUrl } = useStrapi();

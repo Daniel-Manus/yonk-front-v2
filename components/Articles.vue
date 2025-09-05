@@ -1,7 +1,7 @@
 <template>
   <div class="masonry-grid" :class="{ hidden: !imagesLoaded }">
     <template v-for="article in sortedArticles" :key="article.id">
-      <div :class="{ fbx: article.image.ext === '.fbx' }" class="project-thumb">
+      <div :class="{ fbx: article.image?.ext === '.fbx' }" class="project-thumb">
         <ArticleCard :article="article" @image-loaded="imageLoaded" />
       </div>
     </template>
