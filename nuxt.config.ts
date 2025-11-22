@@ -3,6 +3,11 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
 
+  // Netlify deployment configuration
+  nitro: {
+    preset: 'netlify'
+  },
+
   // SEO options via app.head
   app: {
     head: {
