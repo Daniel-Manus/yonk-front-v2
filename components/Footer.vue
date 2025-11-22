@@ -55,6 +55,6 @@ footer {
 }
 .links.right {
   display: flex;
-  gap: $mp / 2;
+  gap: calc($mp / 2);
 }
 </style>
